@@ -2,8 +2,9 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>WebGL - Three.js</title>
+    <link rel="icon" type="image/svg+xml" href="./vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Three.js App</title>
     <style>
       body {
         margin: 0;
@@ -16,8 +17,8 @@
         cursor: move;
       }
     </style>
-    <!-- Vite によるモジュールバンドルの場合、エントリーポイントとして指定 -->
-    <script type="module" src="/src/webgl-tiltshift.ts"></script>
+    <script type="module" crossorigin src="./assets/webgpu-tiltshift-QmBaLW5t.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/scene-Da_MCtHd.js">
   </head>
   <body>
     <canvas id="webgl"></canvas>
