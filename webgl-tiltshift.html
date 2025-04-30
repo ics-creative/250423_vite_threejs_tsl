@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>WebGL - Three.js</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        margin: 0;
+        font-family: sans-serif;
+        overflow: hidden;
+      }
+
+      canvas#webgl {
+        display: block;
+        cursor: move;
+      }
+    </style>
+    <!-- Vite によるモジュールバンドルの場合、エントリーポイントとして指定 -->
+    <script type="module" src="/src/webgl-tiltshift.ts"></script>
+  </head>
+  <body>
+    <canvas id="webgl"></canvas>
+  </body>
+</html>
