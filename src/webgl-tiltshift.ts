@@ -5,6 +5,7 @@ import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js";
 import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
 import { ShaderPass } from "three/addons/postprocessing/ShaderPass.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import Stats from "stats-gl";
 
 // --- 定数定義 ---
 const GRID_SIZE = 80; // グリッドの1辺のセル数 (80x80)
@@ -47,6 +48,15 @@ renderer.setClearColor(0x000000);
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(sizes.width, sizes.height);
 renderer.shadowMap.enabled = true;
+
+// --- Stats.js の初期化 ---
+const stats = new Stats({
+  trackGPU: true,
+  trackHz: true,
+}); // デフォルトオプションで初期化
+stats.init(renderer);
+document.body.appendChild(stats.dom); // 表示要素をDOMに追加
+// --- Stats.js 初期化ここまで ---
 
 // レンダラーの設定後に OrbitControls を初期化
 const controls = new OrbitControls(camera, renderer.domElement);
@@ -228,6 +238,7 @@ const tick = () => {
   spotLight.position.z = SPOTLIGHT_BASE_POS.z + offsetZ;
 
   composer.render();
+  stats.update(); // 計測終了
   window.requestAnimationFrame(tick);
 };
 
