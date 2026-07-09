@@ -1,22 +1,22 @@
 {
   "name": "vite-project",
-  "private": true,
   "version": "0.0.0",
+  "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "format": "prettier --write ."
-  },
-  "devDependencies": {
-    "prettier": "^3.5.3",
-    "typescript": "~5.8.3",
-    "vite": "^6.3.4"
+    "format": "oxfmt"
   },
   "dependencies": {
-    "@types/three": "^0.176.0",
-    "stats-gl": "^3.6.0",
-    "three": "^0.176.0"
+    "@types/three": "^0.185.1",
+    "stats-gl": "^4.2.2",
+    "three": "^0.185.1"
+  },
+  "devDependencies": {
+    "oxfmt": "^0.58.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.1.4"
   }
 }

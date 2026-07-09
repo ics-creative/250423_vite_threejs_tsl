@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { WebGPURenderer, PostProcessing } from "three/webgpu";
+import { RenderPipeline, WebGPURenderer, type Node } from "three/webgpu";
 import { abs, mix, pass, smoothstep, uniform, vec2, viewportUV } from "three/tsl";
 import { gaussianBlur } from "three/examples/jsm/tsl/display/GaussianBlurNode.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
@@ -19,7 +19,7 @@ const renderer = new WebGPURenderer({
 renderer.setSize(sizes.width, sizes.height);
 renderer.setClearColor(0x000000);
 renderer.shadowMap.enabled = true;
-const postProcessing = new PostProcessing(renderer);
+const postProcessing = new RenderPipeline(renderer);
 const finalTiltShiftNode = createTiltShiftNodeGraph(scene, camera);
 postProcessing.outputNode = finalTiltShiftNode;
 
@@ -52,7 +52,7 @@ tick();
 window.addEventListener("resize", handleResize);
 
 // --- Function to create TSL Node Graph (Restore tilt-shift logic) ---
-function createTiltShiftNodeGraph(scene: THREE.Scene, camera: THREE.PerspectiveCamera) {
+function createTiltShiftNodeGraph(scene: THREE.Scene, camera: THREE.PerspectiveCamera): Node {
   const focusPosUniform = uniform(0.5);
   const blurAmountUniform = uniform(1.0);
   const gradientRadiusUniform = uniform(0.1);
@@ -67,7 +67,7 @@ function createTiltShiftNodeGraph(scene: THREE.Scene, camera: THREE.PerspectiveC
   const dist = abs(uv.y.sub(focusPosUniform));
   const blurStrength = smoothstep(gradientRadiusUniform, gradientRadiusUniform.add(0.2), dist);
 
-  const finalNode = mix(sceneColor, blurredScene, blurStrength);
+  const finalNode = mix(sceneColor, blurredScene, blurStrength) as Node;
 
   return finalNode;
 }
